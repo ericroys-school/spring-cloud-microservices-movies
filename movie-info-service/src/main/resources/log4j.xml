@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Configuration status="ERROR" monitorInterval="5">
+        <Appenders>
+                <Console name="Console" target="SYSTEM_OUT">
+                        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p - %m%n"/>
+                </Console>
+                <RollingRandomAccessFile name="PLUGININFO" fileName="/tmp/api.info.log" immediateFlush="true" filePattern="/tmp//$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+                        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%t] %-5p {%X{full}} [%c{1}] %m%n"/>
+                        <Policies>
+                                <SizeBasedTriggeringPolicy size="100 MB" />
+                        </Policies>
+                        <Filters>
+                                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>
+                                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+                        </Filters>
+                        <DefaultRolloverStrategy max="5"/>
+                </RollingRandomAccessFile>
+                <RollingRandomAccessFile name="PLUGINWARN" fileName="/tmp/api.warn.log" immediateFlush="false" filePattern="/var/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+                        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%t] %-5p {%X{full}} [%c{1}] %m%n"/>
+                        <Policies>
+                                <SizeBasedTriggeringPolicy size="100 MB" />
+                        </Policies>
+                        <Filters>
+                                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+                        </Filters>
+                        <DefaultRolloverStrategy max="5"/>
+                </RollingRandomAccessFile>
+
+                <RollingRandomAccessFile name="PLUGINDEBUG" fileName="/tmp/api.debug.log" immediateFlush="true" filePattern="/tmp/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+                        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%t] %-5p {%X{full}} [%c{1}] %m%n"/>
+                        <Policies>
+                                <SizeBasedTriggeringPolicy size="100 MB" />
+                        </Policies>
+                        <Filters>
+                                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+                                <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+                        </Filters>
+                        <DefaultRolloverStrategy max="5"/>
+                </RollingRandomAccessFile>
+                <RollingRandomAccessFile name="PLUGINTRACE" fileName="/tmp/api.trace.log" immediateFlush="true" filePattern="/tmp/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+                        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%t] %-5p {%X{full}} [%c{1}] %m%n"/>
+                        <Policies>
+                                <SizeBasedTriggeringPolicy size="100 MB" />
+                        </Policies>
+                        <Filters>
+                                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+                                <ThresholdFilter level="DEBUG" onMatch="DENY" onMismatch="NEUTRAL"/>
+                                <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+                        </Filters>
+                        <DefaultRolloverStrategy max="5"/>
+                </RollingRandomAccessFile>
+                <RollingRandomAccessFile name="PLUGINERROR" fileName="/tmp/api.error.log" immediateFlush="true" filePattern="/tmp/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+                        <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZ} [%t] %-5p {%X{full}} [%c{1}] %m%n"/>
+                        <Policies>
+                                <SizeBasedTriggeringPolicy size="100 MB" />
+               </Policies>
+                        <Filters>
+                                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+                        </Filters>
+                        <DefaultRolloverStrategy max="5"/>
+                </RollingRandomAccessFile>
+        </Appenders>
+    <Loggers>
+	    <!--<Logger name="org.springframework" level="ERROR" additivity="false">
+			<AppenderRef ref="PLUGINERROR"/>
+		</Logger>-->
+        <Logger name="org.springframework.web.filter.CommonsRequestLoggingFilter">
+                <level value="INFO" />
+            </Logger>               
+	 <!--enable only console logging -->
+                <Logger name="com.yruhere" level="TRACE" additivity="false">
+                  <AppenderRef ref="Console"/>
+                  <AppenderRef ref="PLUGININFO"/>
+                  <AppenderRef ref="PLUGINERROR"/>
+                  <AppenderRef ref="PLUGINDEBUG"/>
+                  <AppenderRef ref="PLUGINTRACE"/>
+                  <AppenderRef ref="PLUGINWARN"/>
+                </Logger>
+    <!--            <Logger name="org.apache" level="ERROR" additivity="false">
+                  <AppenderRef ref="PLUGININFO"/>
+                  <AppenderRef ref="PLUGINERROR"/>
+                  <AppenderRef ref="PLUGINDEBUG"/>
+                  <AppenderRef ref="PLUGINTRACE"/>
+                  <AppenderRef ref="PLUGINWARN"/>
+                </Logger>-->
+       <Root level="TRACE">
+		<AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

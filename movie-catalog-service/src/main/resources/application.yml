@@ -1,0 +1,13 @@
+---
+
+spring.application.name: movie-catalog-service
+server.port: 9001
+client.timeout: 3
+resilience4j.circuitbreaker:
+    configs:
+        default:
+            registerHealthIndicator: true
+            slidingWindowSize: 5
+            waitDurationInOpenState: 60s
+            slowCallDurationThreshold: 3000
+            failureRateThreshold: 3
