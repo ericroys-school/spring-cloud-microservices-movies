@@ -1,16 +1,15 @@
 pipeline {
-    agent any
-
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven "M3"
+    agent {
+        docker {
+            image 'eclipse-temurin:21-jdk-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
     }
 
     stages {
         stage ('Initialize') {
             steps {
                 sh '''
-                if java -version 2>&1 | grep 'version "19"'; sudo apt-get install openjdk-19-jdk
                 echo "DIR = ${PWD}"
                 echo "PATH = ${PATH}"
                 echo "M2_HOME = ${M2_HOME}"
