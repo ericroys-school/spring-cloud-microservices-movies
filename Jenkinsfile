@@ -1,8 +1,7 @@
 pipeline {
     agent {
-        dockerfile {
-            dir 'docker'
-            filename 'Dockerfile'
+        docker {
+            image '3.9.6-eclipse-temurin-21'
         }
     }
 
