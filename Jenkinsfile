@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage ('Initialize') {
             steps {
-                sh "if java -version 2>&1 | grep 'version "19"'; sudo apt-get install openjdk-19-jdk"
                 sh '''
+                if java -version 2>&1 | grep 'version "19"'; sudo apt-get install openjdk-19-jdk
                 echo "DIR = ${PWD}"
                 echo "PATH = ${PATH}"
                 echo "M2_HOME = ${M2_HOME}"
