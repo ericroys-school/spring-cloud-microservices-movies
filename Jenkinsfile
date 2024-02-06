@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build') { 
             steps {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'cd / && find -name pom.xml && mvn -B -DskipTests clean package' 
             }
         }
         stage('Test') {
