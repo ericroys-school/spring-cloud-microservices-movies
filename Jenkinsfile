@@ -7,28 +7,16 @@ pipeline {
     }
 
     stages {
-        stage ('Initialize') {
+        stage('Build') { 
             steps {
-                sh '''
-                echo "DIR = ${PWD}"
-                echo "PATH = ${PATH}"
-                echo "M2_HOME = ${M2_HOME}"
-                echo "JAVA = ${java -version}
-                '''
+                sh 'mvn -B -DskipTests clean package' 
             }
-        }          
-        stage('Build') {
+        }
+        stage('Test') {
             steps {
-                // Get micro-service code which is separate project folder in one repo
-                git 'https://github.com/ericroys/micro-service-playground.git'
-                //start with build of discovery server
-                cd discovery-server
-                // Run Maven on a Unix agent.
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                sh 'mvn test'
+            }
 
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
-            }
         }
     }
 }
