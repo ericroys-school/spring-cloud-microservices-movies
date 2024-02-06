@@ -11,5 +11,5 @@ ENV PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
 LABEL maintainer="Seriously Bob"
 LABEL version="1.0"
 LABEL description="Dockerfile for JDK 21 and Maven"
-ARG '-v /opt/.m2:/opt/.m2'
+
 CMD ["mvn"]

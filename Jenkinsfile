@@ -3,7 +3,6 @@ pipeline {
         dockerfile {
             dir 'docker'
             filename 'Dockerfile'
-            args '-v /opt/.m2:/opt/.m2'
         }
     }
 
