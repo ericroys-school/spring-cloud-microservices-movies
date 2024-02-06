@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Initialize'){
             steps{
-                sh 'yum install maven -y'
+                sh 'RUN apk add --no-cache maven'
             }
         }
         stage('Build') { 
