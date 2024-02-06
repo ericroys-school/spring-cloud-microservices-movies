@@ -2,7 +2,6 @@ pipeline {
     agent {
         dockerfile {
             filename 'Dockerfile'
-            label 'mvnBuilder'
             args '-v /root/.m2:/root/.m2'
         }
     }
