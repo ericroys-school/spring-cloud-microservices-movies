@@ -1,8 +1,9 @@
 pipeline {
     agent {
-        docker {
-            image 'eclipse-temurin:21-jdk-alpine' 
-            args '-v /root/.m2:/root/.m2' 
+        dockerfile {
+            filename 'Dockerfile'
+            label 'mvnBuilder'
+            args '-v /root/.m2:/root/.m2'
         }
     }
 
