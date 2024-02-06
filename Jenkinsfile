@@ -7,11 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Initialize'){
-            steps{
-                sh 'apk add --no-cache maven'
-            }
-        }
+
         stage('Build') { 
             steps {
                 sh 'mvn -B -DskipTests clean package' 
