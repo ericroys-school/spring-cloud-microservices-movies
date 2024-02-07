@@ -31,7 +31,7 @@ pipeline {
                     reuseNode true
                 }            }
             steps {
-                sh 'cd disc* mvn clean install'
+                sh 'cd disc* mvn clean package install'
             }
 
         }
