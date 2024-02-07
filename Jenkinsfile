@@ -39,7 +39,7 @@ pipeline {
             agent {
                 docker {
                     image 'docker:25.0.3-cli-alpine3.19'
-                    args '-u root'
+                    args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
                     reuseNode true
                 }
             }
