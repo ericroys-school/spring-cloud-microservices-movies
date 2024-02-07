@@ -39,7 +39,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.9.6-eclipse-temurin-21'
-                    args '-u root -v $HOME/.m2:/root/.m2 -v /opt/docker_build_dir:/build_out'
+                    args '-u root -v $HOME/.m2:/root/.m2'
                     reuseNode true
                 }
             }
@@ -49,9 +49,7 @@ pipeline {
                 rm -rf dbuild 
                 mkdir dbuild 
                 cd dbuild
-                ls ..
-                echo ----
-                pwd
+                ls ../..
                 cp ../target/discovery-server-0.0.1-SNAPSHOT.jar .
                 docker build -t eureka/server:latest . -f ../../docker/discovery.dockerfile
                 docker tag eureka/server 192.168.1.170:5000/eureka/server
