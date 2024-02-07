@@ -38,8 +38,7 @@ pipeline {
         stage('Deploy'){
             agent {
                 docker {
-                    image 'maven:3.9.6-eclipse-temurin-21'
-                    args '-u root -v $HOME/.m2:/root/.m2'
+                    image '25.0.3-cli-alpine3.19'
                     reuseNode true
                 }
             }
