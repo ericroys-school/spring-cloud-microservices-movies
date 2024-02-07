@@ -3,7 +3,7 @@ pipeline {
   agent any
 
     stages {
-        /*
+        
         stage('Build') { 
             agent {
                 docker {
@@ -22,7 +22,7 @@ pipeline {
                  cd ../discovery* 
                  mvn -B -DskipTests clean package'''
             }
-        }*/
+        }
         stage('Test') {
             agent {
                 docker {
