@@ -1,14 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.6-eclipse-temurin-21'
-            args '-u root'
-        }
-    }
+
+  agent any
 
     stages {
 
         stage('Build') { 
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-21'
+                    args '-u root -v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''cd movie-rating*
                  mvn -B -DskipTests clean package 
@@ -21,8 +24,31 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-21'
+                    args '-u root -v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'cd movie-rating* mvn test'
+            }
+
+        }
+        stage('Deploy'){
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-21'
+                    args '-u root -v $HOME/.m2:/root/.m2 -v /opt/docker_build_dir:/build_out'
+                    reuseNode true
+                }
+            }
+            steps{
+                sh '''
+                cd movie-rating*
+                mvn clean install
+                '''
             }
 
         }
