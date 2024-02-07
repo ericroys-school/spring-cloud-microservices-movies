@@ -44,7 +44,9 @@ pipeline {
             }
             steps{
                 sh '''
+                pwd
                 cd disc*
+                pwd
                 rm -rf dbuild 
                 mkdir dbuild 
                 cd dbuild
