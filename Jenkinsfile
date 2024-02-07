@@ -10,9 +10,9 @@ pipeline {
 
         stage('Build') { 
             steps {
-                sh '''cd movie-rating* && mvn -B -DskipTests clean package
-                && cd ../movie-info* && mvn -B -DskipTests clean package
-                && cd ../movie-cat* && mvn -B -DskipTests clean package
+                sh '''cd movie-rating* && mvn -B -DskipTests clean package 
+                && cd ../movie-info* && mvn -B -DskipTests clean package 
+                && cd ../movie-cat* && mvn -B -DskipTests clean package 
                 && cd ../discovery* && mvn -B -DskipTests clean package'''
             }
         }
