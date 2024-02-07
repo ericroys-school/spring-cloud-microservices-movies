@@ -47,9 +47,9 @@ pipeline {
                 sh '''
                 cd disc*
                 mkdir dbuild
-                cd dbuild cp ../target/discovery-server-0.0.1-SNAPSHOT.jar .
-
-                docker build -t eureka/server:latest . -f docker/discovery.dockerfile
+                cd dbuild 
+                cp ../target/discovery-server-0.0.1-SNAPSHOT.jar .
+                docker build -t eureka/server:latest . -f ../../docker/discovery.dockerfile
                 docker tag eureka/server 192.168.1.170:5000/eureka/server
                 docker push 192.168.1.170:5000/eureka/server
                 '''
