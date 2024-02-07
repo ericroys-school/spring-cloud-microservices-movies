@@ -48,6 +48,8 @@ pipeline {
                 sh '''
                 cd movie-rating*
                 mvn clean install
+                cd target
+                cp movie-ratings-service-0.0.1-SNAPSHOT.jar /build_out
                 '''
             }
 
