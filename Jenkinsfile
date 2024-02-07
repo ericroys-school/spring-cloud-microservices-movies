@@ -46,7 +46,6 @@ pipeline {
             steps{
                 sh '''
                 cd disc*
-                mvn clean install
                 mkdir dbuild
                 cd dbuild cp ../target/discovery-server-0.0.1-SNAPSHOT.jar .
 
