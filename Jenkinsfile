@@ -50,6 +50,10 @@ pipeline {
                 mvn clean install
                 cd target
                 cp movie-ratings-service-0.0.1-SNAPSHOT.jar /build_out
+                cd ../disc*
+                mvn clean install
+                cd target 
+                cp discovery-server-0.0.1-SNAPSHOT.jar /build_out
                 '''
             }
 
