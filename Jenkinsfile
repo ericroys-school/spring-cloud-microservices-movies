@@ -31,7 +31,7 @@ pipeline {
                     reuseNode true
                 }            }
             steps {
-                sh 'cd movie-rating* mvn test'
+                sh 'cd disc* mvn clean install'
             }
 
         }
