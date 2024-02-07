@@ -36,13 +36,13 @@ pipeline {
 
         }
         stage('Deploy'){
-            // agent {
-            //     docker {
-            //         image 'maven:3.9.6-eclipse-temurin-21'
-            //         args '-u root -v $HOME/.m2:/root/.m2 -v /opt/docker_build_dir:/build_out'
-            //         reuseNode true
-            //     }
-            // }
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-21'
+                    args '-u root -v $HOME/.m2:/root/.m2 -v /opt/docker_build_dir:/build_out'
+                    reuseNode true
+                }
+            }
             steps{
                 sh '''
                 cd disc*
