@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @RestController
-@RequestMapping("/catalog")
+@RequestMapping("/api/vi/catalog")
 public class MovieCatalogController {
 
   Logger log = LoggerFactory.getLogger(MovieCatalogController.class);
