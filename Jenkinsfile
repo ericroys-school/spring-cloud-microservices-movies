@@ -84,7 +84,7 @@ pipeline {
                 mkdir dbuild
                 cd dbuild
                 cp ../target/*.jar .
-                cp ../../gateway/docker/Dockerfile .
+                cp ../../movie-catalog*/docker/Dockerfile .
                 docker build -t catalog/server:latest . -f ./Dockerfile
                 docker tag catalog/server 192.168.1.170:5000/catalog/server
                 docker push 192.168.1.170:5000/catalog/server
@@ -94,7 +94,7 @@ pipeline {
                 mkdir dbuild
                 cd dbuild
                 cp ../target/*.jar .
-                cp ../../gateway/docker/Dockerfile .
+                cp ../../movie-info*/docker/Dockerfile .
                 docker build -t movie-info/server:latest . -f ./Dockerfile
                 docker tag movie-info/server 192.168.1.170:5000/movie-info/server
                 docker push 192.168.1.170:5000/movie-info/server
