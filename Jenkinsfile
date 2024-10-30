@@ -37,7 +37,7 @@ pipeline {
             }
 
         }*/
-        stage('Deploy'){
+        //stage('Deploy'){
         /*    agent {
                 docker {
                     image 'docker:25.0.3-cli-alpine3.19'
@@ -76,6 +76,6 @@ pipeline {
                 //cp discovery-server-0.0.1-SNAPSHOT.jar /build_out
                 '''*/
 
-        }
+        //}
     }
 }
