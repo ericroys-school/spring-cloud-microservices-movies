@@ -72,6 +72,7 @@ pipeline {
                 cd ../../gateway
                 rm -rf dbuild
                 mkdir dbuild
+                cd dbuild
                 cp ../target/*.jar .
                 cp ../../gateway/docker/Dockerfile .
                 docker build -t gateway/server:latest . -f ./Dockerfile
@@ -81,6 +82,7 @@ pipeline {
                 cd ../../movie-catalog*
                 rm -rf dbuild
                 mkdir dbuild
+                cd dbuild
                 cp ../target/*.jar .
                 cp ../../gateway/docker/Dockerfile .
                 docker build -t catalog/server:latest . -f ./Dockerfile
@@ -90,6 +92,7 @@ pipeline {
                 cd ../../movie-info*
                 rm -rf dbuild
                 mkdir dbuild
+                cd dbuild
                 cp ../target/*.jar .
                 cp ../../gateway/docker/Dockerfile .
                 docker build -t movie-info/server:latest . -f ./Dockerfile
