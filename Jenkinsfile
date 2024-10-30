@@ -18,7 +18,10 @@ pipeline {
                  cd ../movie-cat*
                  mvn -B -DskipTests clean package
                  cd ../discovery*
-                 mvn -B -DskipTests clean package'''
+                 mvn -B -DskipTests clean package
+                 cd ../gateway
+                 mvn -B -DskipTests clean package
+                 '''
             }
         }
         stage('Test') {
@@ -54,23 +57,47 @@ pipeline {
                 docker build -t eureka/server:latest . -f ./discovery.dockerfile
                 docker tag eureka/server 192.168.1.170:5000/eureka/server
                 docker push 192.168.1.170:5000/eureka/server
+
+                cd ../../movie-rating*
+                pwd
+                rm -rf dbuild
+                mkdir dbuild
+                cd dbuild
+                cp ../target/*.jar .
+                cp ../../movie-rating*/docker/Dockerfile .
+                docker build -t rating/server:latest . -f ./Dockerfile
+                docker tag rating/server 192.168.1.170:5000/rating/server
+                docker push 192.168.1.170:5000/rating/server
+
+                cd ../../gateway
+                rm -rf dbuild
+                mkdir dbuild
+                cp ../target/*.jar .
+                cp ../../gateway/docker/Dockerfile .
+                docker build -t gateway/server:latest . -f ./Dockerfile
+                docker tag gateway/server 192.168.1.170:5000/gateway/server
+                docker push 192.168.1.170:5000/gateway/server
+
+                cd ../../movie-catalog*
+                rm -rf dbuild
+                mkdir dbuild
+                cp ../target/*.jar .
+                cp ../../gateway/docker/Dockerfile .
+                docker build -t catalog/server:latest . -f ./Dockerfile
+                docker tag catalog/server 192.168.1.170:5000/catalog/server
+                docker push 192.168.1.170:5000/catalog/server
+
+                cd ../../movie-info*
+                rm -rf dbuild
+                mkdir dbuild
+                cp ../target/*.jar .
+                cp ../../gateway/docker/Dockerfile .
+                docker build -t movie-info/server:latest . -f ./Dockerfile
+                docker tag movie-info/server 192.168.1.170:5000/movie-info/server
+                docker push 192.168.1.170:5000/movie-info/server
+
                 '''
             }
-            /*
-
-                            sh '''
-                cd movie-rating*
-                mvn clean install
-                cd target
-                //cp movie-ratings-service-0.0.1-SNAPSHOT.jar /build_out
-                cd ../../disc*
-                mkdir dbuild
-                cd dbuild cp ../target/discovery-server-0.0.1-SNAPSHOT.jar .
-                mvn clean install
-                cd target
-                docker build -t eureka/discovery-service:latest
-                //cp discovery-server-0.0.1-SNAPSHOT.jar /build_out
-                '''*/
         }
         }
     }
