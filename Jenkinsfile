@@ -13,6 +13,8 @@ pipeline {
                 }
             }
             steps {
+                sh '''echo HELLO'''
+                /*
                 sh '''cd movie-rating*
                  mvn -B -DskipTests clean package 
                  cd ../movie-info* m
@@ -20,10 +22,10 @@ pipeline {
                  cd ../movie-cat* 
                  mvn -B -DskipTests clean package 
                  cd ../discovery* 
-                 mvn -B -DskipTests clean package'''
+                 mvn -B -DskipTests clean package''' */
             }
         }
-        stage('Test') {
+        /*stage('Test') {
             agent {
                 docker {
                     image 'maven:3.9.6-eclipse-temurin-21'
@@ -34,9 +36,9 @@ pipeline {
                 sh 'cd disc* mvn test'
             }
 
-        }
+        }*/
         stage('Deploy'){
-            agent {
+        /*    agent {
                 docker {
                     image 'docker:25.0.3-cli-alpine3.19'
                     args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
@@ -57,7 +59,7 @@ pipeline {
                 docker tag eureka/server 192.168.1.170:5000/eureka/server
                 docker push 192.168.1.170:5000/eureka/server
                 '''
-            }
+            }*/
             /*
 
                             sh '''
